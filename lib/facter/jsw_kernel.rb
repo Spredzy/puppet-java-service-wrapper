@@ -8,7 +8,7 @@ Facter.add('jsw_kernel') do
     case cur_kernel
     when 'sunos'
       'solaris'
-    when 'Darwmin'
+    when 'Darwin'
       'macosx'
     when 'HP-UX'
       'hpux'
