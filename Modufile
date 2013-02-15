@@ -1,0 +1,8 @@
+name 'yguenane-java_service_wrapper'
+version '0.0.1'
+source 'https://github.com/Spredzy/puppet-java-service-wrapper'
+author 'Yanis Guenane <yguenane@gmail.com>'
+license 'GPLv3'
+summary 'A java-service-wrapper puppet module'
+description 'A module that let you daemonize java services on any OSes jsw handles'
+project_page 'https://github.com/Spredzy/puppet-java-service-wrapper'
