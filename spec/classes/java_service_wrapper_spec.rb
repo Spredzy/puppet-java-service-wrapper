@@ -4,10 +4,6 @@ require 'spec_helper'
 
 describe 'java_service_wrapper' do
 
-  let(:params) do
-    {:base_path => '/usr/local'}
-  end
-
   context 'Linux - x86 - 32bits' do
     let(:facts) do
       {:jsw_kernel => 'linux', :jsw_arch => 'x86-32', :jsw_extension => '.so'}

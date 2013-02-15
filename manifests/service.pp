@@ -43,12 +43,12 @@
 #
 define java_service_wrapper::service(
   $run_as_user        = 'root',
-  $base_path          = '/usr/local',
+  $base_path          = "/usr/local",
   $app_name           = $name,
   $app_long_name      = $name,
   $wrapper_cmd        = './wrapper',
   $wrapper_conf       = "/etc/${name}.conf",
-  $piddir             = "/var/run/${name}.pid",
+  $piddir             = "/var/run/",
   $use_upstart        = false,
   $wrapper_java_cmd   = '/usr/bin/java',
   $wrapper_logfile    = "/var/log/${name}_wrapper.conf",
@@ -59,9 +59,7 @@ define java_service_wrapper::service(
   $wrapper_parameter  = [''],
 ) {
 
-  class {'java_service_wrapper' :
-    base_path => $base_path,
-  }
+  include java_service_wrapper
 
   file {"${base_path}/bin/${app_name}_wrapper" :
     ensure  => 'present',
@@ -85,5 +83,23 @@ define java_service_wrapper::service(
     mode    => '0640',
     content => template("java_service_wrapper/wrapper.conf"),
   }
+
+  file {"/etc/init.d/${app_name}" :
+    ensure => 'link',
+    owner   => $run_as_user,
+    group   => $run_as_user,
+    mode    => '0755',
+    target  => "${base_path}/bin/${app_name}_wrapper",
+    require => File["${base_path}/bin/${app_name}_wrapper"],
+    notify  => Service[$app_name],
+  }
+
+  service {$app_name:
+    ensure => 'running',
+    enable => true,
+    hasstatus => true,
+    hasrestart => true,	
+  }
+
 
 }

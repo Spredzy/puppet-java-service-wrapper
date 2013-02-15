@@ -7,7 +7,7 @@ Facter.add('jsw_arch') do
     cur_model = Facter.value(:hardwaremodel)
     cur_kernel = Facter.value(:kernel)
     return 'universal-32' if cur_kernel.eql? 'Darwin' and cur_model =~ /i[3456]86/
-    return 'universal-64' if cur_kernel.eql? 'Darwin' and cur_model = 'x86_64'
+    return 'universal-64' if cur_kernel.eql? 'Darwin' and cur_model == 'x86_64'
     case cur_model
     when /(i[3456]86|pentium)/
       'x86-32'
