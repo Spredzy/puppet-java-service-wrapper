@@ -20,8 +20,8 @@
 #    [*wrapper_additional*] : Array of JVM configuration flag
 #    [*wrapper_parameter*]  : Array of parameters the application will take as input
 #
-# Actions: 
-# 
+# Actions:
+#
 #    It will install the java_service_wrapper component if not yet installed
 #    It will configure the service_wrapper initd scriot and the service_wrapper.conf
 #    on which java_service_wrapper will rely on for its configuration
@@ -34,7 +34,7 @@
 #
 #    java_service_wrapper::service{'logstash' :
 #         run_as_user => 'logstash',
-#         app_name    => 'logstash', 
+#         app_name    => 'logstash',
 #         wrapper_classpasth => ['/usr/local/lib/wrapper.jar', '/usr/local/bin/logstash.jar'],
 #         wrapper_library => ['/usr/local/lib'],
 #         wrapper_classpasth => ['/usr/local/bin/logstash.jar', 'agent', '-f', '/etc/logstash.d/test.conf']
@@ -52,38 +52,38 @@ define java_service_wrapper::service(
   $use_upstart        = false,
   $wrapper_java_cmd   = '/usr/bin/java',
   $wrapper_logfile    = "/var/log/${name}_wrapper.conf",
-  $wrapper_classpath  = '',
+  $wrapper_classpath  = [''],
   $wrapper_mainclass  = 'WrapperSimpleApp',
-  $wrapper_library    = '',
-  $wrapper_additional = '',
-  $wrapper_parameter  = '',
-  ) {
+  $wrapper_library    = [''],
+  $wrapper_additional = [''],
+  $wrapper_parameter  = [''],
+) {
 
-    class {'java_service_wrapper' :
-      base_path => $base_path,
-    }
-
-    file {"${base_path}/bin/${app_name}_wrapper" :
-      ensure  => 'present',
-      owner   => $run_as_user,
-      group   => $run_as_user,
-      mode    => '0755',
-      content => template("java_service_wrapper/sh.script.in"),
-    }
-
-    file {$wrapper_logfile :
-      ensure => 'present',
-      owner  => $run_as_user,
-      group  => $run_as_user,
-      mode   => '0640',
-    }
-
-    file {$wrapper_conf :
-      ensure  => 'present',
-      owner   => $run_as_user,
-      group   => $run_as_user,
-      mode    => '0640',
-      content => template("java_service_wrapper/wrapper.conf"),
-    }
-
+  class {'java_service_wrapper' :
+    base_path => $base_path,
   }
+
+  file {"${base_path}/bin/${app_name}_wrapper" :
+    ensure  => 'present',
+    owner   => $run_as_user,
+    group   => $run_as_user,
+    mode    => '0755',
+    content => template("java_service_wrapper/sh.script.in"),
+  }
+
+  file {$wrapper_logfile :
+    ensure => 'present',
+    owner  => $run_as_user,
+    group  => $run_as_user,
+    mode   => '0640',
+  }
+
+  file {$wrapper_conf :
+    ensure  => 'present',
+    owner   => $run_as_user,
+    group   => $run_as_user,
+    mode    => '0640',
+    content => template("java_service_wrapper/wrapper.conf"),
+  }
+
+}
