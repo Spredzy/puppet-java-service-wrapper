@@ -1,4 +1,4 @@
-# A Puppet module for java-service-wrapper [![Build Status](https://travis-ci.org/Spredzy/puppet-java-service-wrapper.png)](https://travis-ci.org//Spredzy/puppet-java-service-wrapper)
+# A Puppet module for java-service-wrapper [![Build Status](https://travis-ci.org/Spredzy/puppet-java-service-wrapper.png)](https://travis-ci.org/Spredzy/puppet-java-service-wrapper)
 
 The Java Service Wrapper enables a Java Application to be run as a Windows Service or UNIX Daemon.
 This module allows one to daemonize her java services with the jsw libraries.
