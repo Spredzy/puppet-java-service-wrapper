@@ -61,6 +61,8 @@ define java_service_wrapper::service(
 
   include java_service_wrapper
 
+  File[$wrapper_logfile] -> File[$wrapper_conf] -> File["${base_path}/bin/${app_name}_wrapper"] -> File["/etc/init.d/${app_name}"] ~> Service[$app_name]
+
   file {"${base_path}/bin/${app_name}_wrapper" :
     ensure  => 'present',
     owner   => $run_as_user,
@@ -85,21 +87,18 @@ define java_service_wrapper::service(
   }
 
   file {"/etc/init.d/${app_name}" :
-    ensure => 'link',
+    ensure  => 'link',
     owner   => $run_as_user,
     group   => $run_as_user,
     mode    => '0755',
     target  => "${base_path}/bin/${app_name}_wrapper",
-    require => File["${base_path}/bin/${app_name}_wrapper"],
-    notify  => Service[$app_name],
   }
 
   service {$app_name:
-    ensure => 'running',
-    enable => true,
-    hasstatus => true,
-    hasrestart => true,	
+    ensure     => 'running',
+    enable     => true,
+    hasstatus  => true,
+    hasrestart => true,
   }
-
 
 }

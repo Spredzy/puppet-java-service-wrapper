@@ -1,3 +1,7 @@
+2013-02-24  Yanis Guenane  <yguenane@gmail.com> - 0.0.1-1
+
+  * Fix improper ressource ordering
+
 2013-02-14  Yanis Guenane  <yguenane@gmail.com> - 0.0.1
 
   * install java-service-wrapper on OSes handled by both Puppet and JSW
