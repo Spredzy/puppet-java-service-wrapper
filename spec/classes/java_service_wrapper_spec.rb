@@ -12,13 +12,14 @@ describe 'java_service_wrapper' do
     it "should create class 'java_service_wrapper'" do
       should create_class('java_service_wrapper')
     end
+
     it 'should create /usr/local/lib/wrapper.jar' do
       should contain_file('/usr/local/lib/wrapper.jar').with({
         'ensure' => 'present',
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/lib/wrapper.jar',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/lib/wrapper.jar',
       })
     end
 
@@ -28,7 +29,7 @@ describe 'java_service_wrapper' do
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/lib/libwrapper-linux-x86-32.so',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/lib/libwrapper-linux-x86-32.so',
       })
     end
 
@@ -38,7 +39,7 @@ describe 'java_service_wrapper' do
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/bin/wrapper-linux-x86-32',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/bin/wrapper-linux-x86-32',
       })
     end
   end
@@ -51,13 +52,14 @@ describe 'java_service_wrapper' do
     it "should create class 'java_service_wrapper'" do
       should create_class('java_service_wrapper')
     end
+
     it 'should create /usr/local/lib/wrapper.jar' do
       should contain_file('/usr/local/lib/wrapper.jar').with({
         'ensure' => 'present',
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/lib/wrapper.jar',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/lib/wrapper.jar',
       })
     end
 
@@ -67,7 +69,7 @@ describe 'java_service_wrapper' do
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/lib/libwrapper-linux-x86-64.so',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/lib/libwrapper-linux-x86-64.so',
       })
     end
 
@@ -77,7 +79,7 @@ describe 'java_service_wrapper' do
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/bin/wrapper-linux-x86-64',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/bin/wrapper-linux-x86-64',
       })
     end
   end
@@ -90,13 +92,14 @@ describe 'java_service_wrapper' do
     it "should create class 'java_service_wrapper'" do
       should create_class('java_service_wrapper')
     end
+
     it 'should create /usr/local/lib/wrapper.jar' do
       should contain_file('/usr/local/lib/wrapper.jar').with({
         'ensure' => 'present',
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/lib/wrapper.jar',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/lib/wrapper.jar',
       })
     end
 
@@ -106,7 +109,7 @@ describe 'java_service_wrapper' do
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/lib/libwrapper-macosx-universal-32.jnilib',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/lib/libwrapper-macosx-universal-32.jnilib',
       })
     end
 
@@ -116,7 +119,7 @@ describe 'java_service_wrapper' do
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/bin/wrapper-macosx-universal-32',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/bin/wrapper-macosx-universal-32',
       })
     end
   end
@@ -129,13 +132,14 @@ describe 'java_service_wrapper' do
     it "should create class 'java_service_wrapper'" do
       should create_class('java_service_wrapper')
     end
+
     it 'should create /usr/local/lib/wrapper.jar' do
       should contain_file('/usr/local/lib/wrapper.jar').with({
         'ensure' => 'present',
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/lib/wrapper.jar',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/lib/wrapper.jar',
       })
     end
 
@@ -145,7 +149,7 @@ describe 'java_service_wrapper' do
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/lib/libwrapper-macosx-universal-64.jnilib',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/lib/libwrapper-macosx-universal-64.jnilib',
       })
     end
 
@@ -155,8 +159,9 @@ describe 'java_service_wrapper' do
         'owner'  => 'root',
         'group'	 => 'root',
         'mode'   => '0755',
-        'source' => 'puppet:///modules/java_service_wrapper/bin/wrapper-macosx-universal-64',
+        'source' => 'puppet:///modules/java_service_wrapper/usr/local/bin/wrapper-macosx-universal-64',
       })
     end
   end
+
 end

@@ -43,15 +43,15 @@
 #
 define java_service_wrapper::service(
   $run_as_user        = 'root',
-  $base_path          = "/usr/local",
+  $base_path          = '/usr/local',
   $app_name           = $name,
   $app_long_name      = $name,
   $wrapper_cmd        = './wrapper',
   $wrapper_conf       = "/etc/${name}.conf",
-  $piddir             = "/var/run/",
+  $piddir             = '/var/run/',
   $use_upstart        = false,
   $wrapper_java_cmd   = '/usr/bin/java',
-  $wrapper_logfile    = "/var/log/${name}_wrapper.conf",
+  $wrapper_logfile    = "/var/log/${name}_wrapper.log",
   $wrapper_classpath  = [''],
   $wrapper_mainclass  = 'WrapperSimpleApp',
   $wrapper_library    = [''],
@@ -61,35 +61,61 @@ define java_service_wrapper::service(
 
   include java_service_wrapper
 
-  File[$wrapper_logfile] -> File[$wrapper_conf] -> File["${base_path}/bin/${app_name}_wrapper"] -> File["/etc/init.d/${app_name}"] ~> Service[$app_name]
+  validate_string($run_as_user)
+  validate_string($base_path)
+  validate_string($app_name)
+  validate_string($app_long_name)
+  validate_string($wrapper_cmd)
+  validate_string($wrapper_conf)
+  validate_string($piddir)
+  validate_string($wrapper_java_cmd)
+  validate_string($wrapper_logfile)
+  validate_string($wrapper_mainclass)
 
-  file {"${base_path}/bin/${app_name}_wrapper" :
-    ensure  => 'present',
-    owner   => $run_as_user,
-    group   => $run_as_user,
-    mode    => '0755',
-    content => template("java_service_wrapper/sh.script.in"),
+  validate_bool($use_upstart)
+
+  if $wrapper_classpath {
+    validate_array($wrapper_classpath)
   }
 
-  file {$wrapper_logfile :
+  if $wrapper_library {
+    validate_array($wrapper_library)
+  }
+
+  if $wrapper_additional {
+    validate_array($wrapper_additional)
+  }
+
+  if $wrapper_parameter {
+    validate_array($wrapper_parameter)
+  }
+
+  File[$wrapper_logfile] -> File[$wrapper_conf] -> File["${base_path}/bin/${app_name}_wrapper"] -> File["/etc/init.d/${app_name}"] ~> Service[$app_name]
+
+  File {
+    owner => $run_as_user,
+    group => $run_as_user
+  }
+
+  file {$wrapper_logfile:
     ensure => 'present',
-    owner  => $run_as_user,
-    group  => $run_as_user,
     mode   => '0640',
   }
 
-  file {$wrapper_conf :
+  file {$wrapper_conf:
     ensure  => 'present',
-    owner   => $run_as_user,
-    group   => $run_as_user,
     mode    => '0640',
-    content => template("java_service_wrapper/wrapper.conf"),
+    content => template("${module_name}/etc/wrapper.conf.erb"),
   }
 
-  file {"/etc/init.d/${app_name}" :
+  file {"${base_path}/bin/${app_name}_wrapper" :
+    ensure  => 'present',
+    mode    => '0755',
+    content => template("${module_name}/usr/local/bin/sh.script.in.erb"),
+  }
+
+  file {"/etc/init.d/${app_name}":
     ensure  => 'link',
-    owner   => $run_as_user,
-    group   => $run_as_user,
     mode    => '0755',
     target  => "${base_path}/bin/${app_name}_wrapper",
   }

@@ -63,7 +63,7 @@ describe 'java_service_wrapper::service' do
 
     it 'wrapper.conf file with appropriate parameters' do
       should contain_file('/etc/logstash.conf')\
-        .with_content(/^wrapper\.logfile=\/var\/log\/logstash_wrapper\.conf$/)\
+        .with_content(/^wrapper\.logfile=\/var\/log\/logstash_wrapper\.log$/)\
         .with_content(/^wrapper\.java\.command=\/usr\/bin\/java$/)\
         .with_content(/^wrapper\.java\.mainclass=org\.tanukisoftware\.wrapper\.WrapperJarApp$/)\
         .with_content(/^wrapper\.java\.classpath\.1=\/usr\/local\/lib\/wrapper\.jar$/)\
@@ -144,7 +144,7 @@ describe 'java_service_wrapper::service' do
 
     it 'wrapper.conf file with appropriate parameters' do
       should contain_file('/etc/logstash.conf')\
-        .with_content(/^wrapper\.logfile=\/var\/log\/logstash_wrapper\.conf$/)\
+        .with_content(/^wrapper\.logfile=\/var\/log\/logstash_wrapper\.log$/)\
         .with_content(/^wrapper\.java\.command=\/usr\/bin\/java$/)\
         .with_content(/^wrapper\.java\.mainclass=org\.tanukisoftware\.wrapper\.WrapperJarApp$/)\
         .with_content(/^wrapper\.java\.classpath\.1=\/usr\/local\/lib\/wrapper\.jar$/)\
