@@ -26,12 +26,12 @@
 #
 class java_service_wrapper() {
 
-  file {"/usr/local/lib/wrapper.jar" :
+  file {'/usr/local/lib/wrapper.jar':
     ensure => present,
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => "puppet:///modules/java_service_wrapper/lib/wrapper.jar",
+    source => "puppet:///modules/${module_name}/usr/local/lib/wrapper.jar",
   }
 
   file {"/usr/local/lib/libwrapper${::jsw_extension}":
@@ -39,14 +39,14 @@ class java_service_wrapper() {
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => "puppet:///modules/java_service_wrapper/lib/libwrapper-${::jsw_kernel}-${::jsw_arch}${::jsw_extension}",
+    source => "puppet:///modules/${module_name}/usr/local/lib/libwrapper-${::jsw_kernel}-${::jsw_arch}${::jsw_extension}",
   }
 
-  file {"/usr/local/bin/wrapper" :
+  file {'/usr/local/bin/wrapper':
     ensure => present,
     owner  => 'root',
     group  => 'root',
     mode   => '0755',
-    source => "puppet:///modules/java_service_wrapper/bin/wrapper-${::jsw_kernel}-${::jsw_arch}",
+    source => "puppet:///modules/${module_name}/usr/local/bin/wrapper-${::jsw_kernel}-${::jsw_arch}",
   }
 }
