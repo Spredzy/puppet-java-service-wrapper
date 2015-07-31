@@ -18,7 +18,7 @@ This example is based on logstash
 
 If all you want is install the java-service-wrapper libraries, simply add the following to your manifests
 
-    include java-service-wrapper
+    include java_service_wrapper
 
 ## Notes
 
